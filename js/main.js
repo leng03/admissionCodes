@@ -30,12 +30,23 @@ function dateDiff()
   let db = 365 - (dayArray[m-1] + t); // dayBorn calcalute to end of year
   let v = (365 * (year-1)) + dayArray[m-1] + today + db;
 
-  if (!b) // check to see if user selected a birthday
+  if (!b) {// check to see if user selected a birthday
     document.getElementById("dateTest").innerHTML = "Invalid birthday";
-  else if (year>17 && month >= m && today >= t) // check if age over 17, & if today is bday, else not old enough
+    return;
+  }
+  if (year>17) {// check if age over 17, & if today is bday, else not old enough
     document.getElementById("dateTest").innerHTML = f + " " + l + " you have been breathing for " + v + " days!";
-  else
-    document.getElementById("dateTest").innerHTML = "You are probably not old enough to take this class!";
+    return;
+  }
+  if (year===17){
+    if(month >= m){
+      if(today >= t) {
+        document.getElementById("dateTest").innerHTML = f + " " + l + " you have been breathing for " + v + " days!";
+        return;
+      } // today is your birthday
+    }
+  }
+  document.getElementById("dateTest").innerHTML = "You are probably not old enough to take this class!";
 }
 
 function checkUserInput()
